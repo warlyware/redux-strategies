@@ -10,14 +10,17 @@ const initialState = {
 export default function dataReducer(state = initialState, action) {
   switch(action.type) {
     case FETCHING_DATA:
+      console.log('fetching');
       return {
         ...state,
         data: [],
         isFetching: true
       }
     case FETCHING_DATA_SUCCESS:
+      console.log('fetched');
       return {
         ...state,
+        dataFetched: true,
         isFetching: false,
         data: action.data,
       }

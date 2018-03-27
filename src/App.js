@@ -5,20 +5,24 @@ import { fetchData } from './actions'
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+const App = (props) => {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h1 className="App-title">Welcome to React</h1>
+        <button onClick={() => props.fetchData()}>Load Data</button>
+      </header>
+      <ul>
+        {
+          props.appData.data.length ?
+          props.appData.data.map((person, i) => {
+            return <li key={i}>{person.name}</li>
+          }) : null
+        }
+      </ul>
+    </div>
+  );
 }
 
 function mapStateToProps(state) {
@@ -29,7 +33,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchData: () => dipatch(fetchData())
+    fetchData: () => dispatch(fetchData())
   }
 }
 
