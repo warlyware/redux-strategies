@@ -1,4 +1,4 @@
-import { FETCHING_DATA, FETCHING_DATA_SUCCESS, FETCHING_DATA_FAILURE } from '../constants';
+import { FETCHING_DATA_PENDING, FETCHING_DATA_FULFILLED, FETCHING_DATA_REJECTED } from '../constants';
 
 const initialState = {
   data: [],
@@ -9,22 +9,22 @@ const initialState = {
 
 export default function dataReducer(state = initialState, action) {
   switch(action.type) {
-    case FETCHING_DATA:
+    case FETCHING_DATA_PENDING:
       console.log('fetching');
       return {
         ...state,
         data: [],
         isFetching: true
       }
-    case FETCHING_DATA_SUCCESS:
-      console.log('fetched');
+    case FETCHING_DATA_FULFILLED:
+      console.log('fetched', action);
       return {
         ...state,
         dataFetched: true,
         isFetching: false,
-        data: action.data,
+        data: action.payload,
       }
-    case FETCHING_DATA_FAILURE:
+    case FETCHING_DATA_REJECTED:
       return {
         ...state,
         isFetching: false,
